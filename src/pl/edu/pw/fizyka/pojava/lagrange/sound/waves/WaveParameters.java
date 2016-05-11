@@ -22,7 +22,6 @@ public class WaveParameters {
 
 	protected int frequency;
 	
-	protected WaveTypes waveType;
 
 	private String fileName = null;
 
@@ -42,14 +41,6 @@ public class WaveParameters {
 
 	public void setAmplitude(int amplitude) {
 		this.amplitude = amplitude;
-	}
-
-	public WaveTypes getWaveType() {
-		return waveType;
-	}
-
-	public void setWaveType(WaveTypes waveType) {
-		this.waveType = waveType;
 	}
 	
 	public void setSamplingRate(int samplingRate){
@@ -88,11 +79,10 @@ public class WaveParameters {
 	}
 
 
-	public WaveParameters(int frequency, int amplitude,WaveTypes waveType) {
+	public WaveParameters(int frequency, int amplitude) {
 		
 		this.frequency = frequency;
 		this.amplitude = amplitude;
-		this.waveType = waveType;
 		setDuration(10);
 		
 	}

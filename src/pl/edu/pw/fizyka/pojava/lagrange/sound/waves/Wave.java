@@ -3,24 +3,27 @@ package pl.edu.pw.fizyka.pojava.lagrange.sound.waves;
 import java.io.File;
 import java.io.IOException;
 
+import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.wavfile.WavFile;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.wavfile.WavFileException;
 public abstract class Wave {
 	
-	private WaveParameters waveParams;
+	protected WaveParameters waveParams;
+	protected WaveTypes waveType;
 	
 	Wave(WaveParameters waveParams){
-		
+		waveType=null;
 		this.waveParams=waveParams;
 	}
 	
 	
 	/**
-	 * @param frequency
 	 * @param time 
 	 * @return returns the displacement of wave function in given time with values ranging from -1 to 1
 	 */
-	protected abstract double calculateWave(int frequency, double time);
+	public abstract double calculateWave(double time);
+	
+	
 	
 	public void generateWavFile(){
 		
@@ -52,7 +55,7 @@ public abstract class Wave {
 	
 	@Override
 	public String toString(){
-		return waveParams.getWaveType().toString();	
+		return this.waveType.toString();	
 	}
 	
 	/**
@@ -82,7 +85,7 @@ public abstract class Wave {
 			}
 			
 			for(int i = 0; i < toWrite ; i++, frameCounter++){
-				buffor[i] = calculateWave(waveParams.getFrequency(), (double) frameCounter/waveParams.getSamplingRate()) ;
+				buffor[i] = calculateWave((double) frameCounter/waveParams.getSamplingRate()) ;
 			}
 			
 			try {

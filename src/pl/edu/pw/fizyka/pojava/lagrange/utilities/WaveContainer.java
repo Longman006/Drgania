@@ -18,8 +18,8 @@ public class WaveContainer {
 		wavesList = new ArrayList<Wave>();
 	}
 	
-	public void addWave(WaveParameters waveParams){
-		wavesList.add(waveParams.getWaveType().getWave(waveParams));
+	public void addWave(WaveParameters waveParams,WaveTypes waveType){
+		wavesList.add(waveType.getWave(waveParams));
 	}
 	
 	public Wave[] toArray(){

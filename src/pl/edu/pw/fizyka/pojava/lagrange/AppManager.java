@@ -14,7 +14,7 @@ public class AppManager {
 	}
 
 	public static void main(String[] args) {
-		
+		AppManager app = new AppManager();
 
 	}
 

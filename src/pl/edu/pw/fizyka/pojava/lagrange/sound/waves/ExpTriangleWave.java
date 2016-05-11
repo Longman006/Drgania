@@ -1,16 +1,18 @@
 package pl.edu.pw.fizyka.pojava.lagrange.sound.waves;
 
+import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
+
 public class ExpTriangleWave extends Wave {
 
 	public ExpTriangleWave(WaveParameters waveParams) {
 		super(waveParams);
-		// TODO Auto-generated constructor stub
+		this.waveType = WaveTypes.EXPONENTIAL_TRIANGLE;
 	}
 
 	@Override
-	protected double calculateWave(int frequency, double time) {
+	public double calculateWave(double time) {
 		// TODO Auto-generated method stub
-		return Math.exp(-Math.abs(2*Math.asin(Math.sin(2 * Math.PI * frequency * time))/Math.PI));
+		return Math.exp(-Math.abs(2*Math.asin(Math.sin(2 * Math.PI * this.waveParams.getFrequency() * time))/Math.PI));
 	}
 
 }

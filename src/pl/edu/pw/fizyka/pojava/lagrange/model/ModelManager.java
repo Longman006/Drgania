@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveContainer;
+import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
 public class ModelManager {
 	
 	private ArrayList<WaveContainer> waveContainers = new ArrayList<WaveContainer>();
-
 	/**
 	 * Manages all the wave functions. Contains an ArrayList of WaveContainers, 
 	 * each being a package of wave functions for which to calculate 
@@ -16,12 +16,13 @@ public class ModelManager {
 	 */
 	public ModelManager() {
 		
-		waveContainers.add(new WaveContainer());
+		this.newWaveContainer();
 		
 	}
 	
 	/**
-	 * Creates and adds a new WaveContainer to the ArrayList of wave packages.
+	 * Creates and adds a new WaveContainer 
+	 * to the ArrayList of wave packages.
 	 */
 	public void newWaveContainer(){
 		
@@ -30,12 +31,13 @@ public class ModelManager {
 	}
 	
 	/**
-	 * Adds a new wave to current wave package
+	 * Adds a new wave based on waveParams 
+	 * to current wave package
 	 * @param waveParams 
 	 */
-	public void addWave(WaveParameters waveParams){
+	public void addWave(WaveParameters waveParams,WaveTypes waveType){
 		
-		this.getCurrentWaveContainer().addWave(waveParams);
+		this.getCurrentWaveContainer().addWave(waveParams,waveType);
 		
 	}
 	private WaveContainer getCurrentWaveContainer(){
@@ -43,7 +45,8 @@ public class ModelManager {
 	}
 	
 	/**
-	 * @return returns a Wave array containing all the current working wave functions
+	 * @return returns a Wave array 
+	 * containing all the current working wave functions
 	 */
 	public Wave[] getCurrentWaveArray(){
 		return getCurrentWaveContainer().toArray();

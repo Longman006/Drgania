@@ -1,15 +1,18 @@
 package pl.edu.pw.fizyka.pojava.lagrange.sound.waves;
 
+import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
+
 public class SineWave extends Wave {
 
 	public SineWave(WaveParameters waveParams) {
 		super(waveParams);
+		this.waveType = WaveTypes.SINE;
 	}
 
 	@Override
-	protected double calculateWave(int frequency, double time) {
+	public double calculateWave(double time) {
 		
-		return Math.sin(2 * Math.PI * frequency * time);
+		return Math.sin(2 * Math.PI * this.waveParams.getFrequency() * time);
 		
 	}
 

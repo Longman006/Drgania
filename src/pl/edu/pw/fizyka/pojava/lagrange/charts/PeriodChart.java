@@ -1,12 +1,17 @@
 package pl.edu.pw.fizyka.pojava.lagrange.charts;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -19,6 +24,7 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import net.miginfocom.swing.MigLayout;
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.SineWave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
@@ -32,13 +38,62 @@ public class PeriodChart extends JPanel {
 	private ChartPanel chartPanel;
 	private ModelManager model;
 	private JComboBox<Wave> waveDisplaySelection;
-	private int points = 100;
+	private JPanel settingsPanel;
 	
+	private int points = 100;
+	private int updateSpeed = 2000;//miliseconds
+	
+	/**
+	 * @param model
+	 */
 	public PeriodChart(ModelManager model) {
 		
-		this.model = model;
+		this.setLayout(new MigLayout());
+		settingsPanel = new JPanel(new FlowLayout());
 		
-		waveDisplaySelection = new JComboBox<Wave>();
+		//waveDisplaySelection = new JComboBox<Wave>();
+		this.model = model;
+		/*
+		
+		
+		waveDisplaySelection.addPopupMenuListener(new PopupMenuListener(){
+
+			@Override
+			public void popupMenuCanceled(PopupMenuEvent arg0) {
+				
+				Wave waveTmp = (Wave) waveDisplaySelection.getSelectedItem();
+				if(waveTmp != wave){
+					
+					wave=waveTmp;
+					UpdateDisplay();
+				}
+				
+				
+				
+			}
+
+			@Override
+			public void popupMenuWillBecomeVisible(PopupMenuEvent arg0) {
+				UpdateOptions();
+				
+			}
+
+			@Override
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				System.out.println("JComboBox has become invisible");
+			}
+			
+		});;
+		waveDisplaySelection.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				wave= (Wave)waveDisplaySelection.getSelectedItem();
+				
+			}
+			
+		});
+		*/
 		wave= new SineWave(new WaveParameters(
 				440, // frequency 
 				1   // Amplitude
@@ -48,6 +103,26 @@ public class PeriodChart extends JPanel {
 		chart = createChart(dataset);
 		chartPanel = new ChartPanel(chart);
 		this.add(chartPanel);
+		//this.add(waveDisplaySelection);
+	}
+
+	protected void UpdateDisplay() {
+		chart.getXYPlot().setDataset(createDataset());
+	}
+
+	protected void UpdateOptions() {
+		
+		if(this.waveDisplaySelection.getComponentCount() != 
+				model.getCurrentWaveContainerSize()){
+			
+			waveDisplaySelection.removeAllItems();
+			
+			for(Wave wave : model.getCurrentWaveArray() ){
+				
+				waveDisplaySelection.addItem(wave);
+			}
+		}
+		
 	}
 
 	/**
@@ -55,6 +130,7 @@ public class PeriodChart extends JPanel {
 	 * @return
 	 */
 	private JFreeChart createChart(XYDataset dataset) {
+		
 		JFreeChart chart = ChartFactory.createXYLineChart(
 				wave.toString()+" "+wave.getFrequency()+"Hz", //chart title
 				"t/T", //xAxisLabel
@@ -63,8 +139,8 @@ public class PeriodChart extends JPanel {
 				PlotOrientation.VERTICAL, //orientation
 				true, //include legend
 				true,  //include tooltips
-				false
-				); //include urls ???
+				false //include urls ???
+				); 
 		
 		chart.setBackgroundPaint(Color.white);
 
@@ -90,6 +166,9 @@ public class PeriodChart extends JPanel {
 		return chart;
 	}
 
+	/**
+	 * @return
+	 */
 	private XYDataset createDataset() {
 		
 		XYSeries series1 = new XYSeries(wave.toString());
@@ -112,5 +191,6 @@ public class PeriodChart extends JPanel {
 		return dataset;
 	}
 
+	
 
 }

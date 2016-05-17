@@ -27,8 +27,8 @@ public class ChartsPanel extends JPanel {
 	 * 
 	 */
 	private ModelManager model;
-	private int numOfSideCharts=2;
-	private ArrayList<JComboBox<String>> waveDisplaySelection;
+	//private int numOfSideCharts=2;
+	//private ArrayList<JComboBox<String>> waveDisplaySelection;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -39,6 +39,10 @@ public class ChartsPanel extends JPanel {
 	 		
 		this.setLayout(new MigLayout());
 		this.add(new PeriodChart(model));
+		this.add(new DynamicChart(new SineWave(new WaveParameters(
+				1, // frequency 
+				1   // Amplitude
+			))));
 		/*		
 		this.add(dynamicSideChart,"wrap,center,growx");
 		dynamicSideChart.start();
@@ -56,6 +60,7 @@ public class ChartsPanel extends JPanel {
 		*/
 
 	}
+	/*
 	public void DisplayChartOptions(){
 		
 		Wave[] waves = model.getCurrentWaveArray();
@@ -66,5 +71,6 @@ public class ChartsPanel extends JPanel {
 			}
 		}
 	}
+	*/
 
 }

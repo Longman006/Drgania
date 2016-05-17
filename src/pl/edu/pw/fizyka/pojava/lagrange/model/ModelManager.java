@@ -36,7 +36,7 @@ public class ModelManager {
 	 * @param waveParams 
 	 */
 	public void addWave(WaveParameters waveParams,WaveTypes waveType){
-		
+		System.out.println("Adding wave  : "+waveType.toString());
 		this.getCurrentWaveContainer().addWave(waveParams,waveType);
 		
 	}
@@ -51,6 +51,9 @@ public class ModelManager {
 	public Wave[] getCurrentWaveArray(){
 		return getCurrentWaveContainer().toArray();
 		
+	}
+	public int getCurrentWaveContainerSize(){
+		return getCurrentWaveContainer().getSize();
 	}
 
 }

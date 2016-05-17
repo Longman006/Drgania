@@ -3,6 +3,7 @@ package pl.edu.pw.fizyka.pojava.lagrange.layout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
@@ -27,6 +28,7 @@ public class LayoutManager {
 		
 		frame.setVisible(true);
 		frame.setSize(600,1200);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
 		mainPanel.add(chartsPanel, "span 2,growx,wrap");
 		mainPanel.add(settingsPanel,"right,gapleft 40");

@@ -13,6 +13,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.general.Dataset;
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
@@ -42,10 +43,12 @@ public class DynamicChart extends JPanel implements ActionListener {
 		this.wave = wave;
 		ChartPanel chartPanel = new ChartPanel(chart);
 		this.add(chartPanel);
+		timer.start();
 		
 	}
 
 	private JFreeChart createChart (XYDataset dataset){
+		
 		JFreeChart chartCreated = ChartFactory.createTimeSeriesChart(
 				"Chart Name",
 				"Time",
@@ -65,7 +68,15 @@ public class DynamicChart extends JPanel implements ActionListener {
 		xAxis.setVerticalTickLabels(true);
 		
 		ValueAxis yAxis = plot.getRangeAxis();
-		yAxis.setRange(0.0,1.0);
+		yAxis.setRange(-1.0,1.0);
+		
+		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+		
+		renderer.setSeriesLinesVisible(
+				0, //series number
+				false //include connecting lines
+				);
+		plot.setRenderer(renderer);
 		
 		return chartCreated;
 		
@@ -78,9 +89,9 @@ public class DynamicChart extends JPanel implements ActionListener {
 		
 		Millisecond now2 =  new Millisecond();
 		long now = System.currentTimeMillis();
-		Double displacement = this.wave.calculateWave(now/1000);
-		System.out.println("displacement : " + displacement +
-				" at time"+ now);
+		Double displacement = this.wave.calculateWave((double)now/1000);
+		//System.out.println("displacement : " + displacement +
+		//		" at time"+ now);
 		this.timeSeries.add(now2, displacement );
 	}
 

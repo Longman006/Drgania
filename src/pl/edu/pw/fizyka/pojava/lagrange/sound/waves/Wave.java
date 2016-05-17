@@ -58,6 +58,10 @@ public abstract class Wave {
 		return this.waveType.toString();	
 	}
 	
+	public int getFrequency(){
+		return waveParams.getFrequency();
+	}
+	
 	/**
 	 * Writes wave to Wav file in 100 frame portions
 	 * 	 

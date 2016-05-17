@@ -13,6 +13,7 @@ import org.jfree.data.xy.DefaultXYDataset;
 
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pw.fizyka.pojava.lagrange.charts.DynamicChart;
+import pl.edu.pw.fizyka.pojava.lagrange.charts.PeriodChart;
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.SineWave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
@@ -29,49 +30,21 @@ public class ChartsPanel extends JPanel {
 	private int numOfSideCharts=2;
 	private ArrayList<JComboBox<String>> waveDisplaySelection;
 	
-	
-	/**
-	private ChartPanel mainChart = new ChartPanel(ChartFactory.createXYLineChart(
-			"main chart",
-			"xAxis",
-			"yAxis",
-			new DefaultXYDataset()));
-	private ChartPanel sideChart1 = new ChartPanel(ChartFactory.createXYLineChart(
-			"side chart 1",
-			"xAxis",
-			"yAxis",
-			new DefaultXYDataset()));
-	
-	private ChartPanel sideChart2 = new ChartPanel(ChartFactory.createXYLineChart(
-			"side chart 2",
-			"xAxis",
-			"yAxis",
-			new DefaultXYDataset()));
-	*/
-	
 	private static final long serialVersionUID = 1L;
 
-	private DynamicChart dynamicSideChart;
 	
 	public ChartsPanel(ModelManager model) {
 		
 		this.model = model;
-		this.dynamicSideChart = new DynamicChart(new SineWave(new WaveParameters(
-				440,
-				1
-				)));
-		waveDisplaySelection = new ArrayList<JComboBox<String>>();
-		
-		for(int ii = 0; ii < numOfSideCharts; ii++){
-			waveDisplaySelection.add(new JComboBox<String>());
-		}
 	 		
 		this.setLayout(new MigLayout());
+		this.add(new PeriodChart(model));
+		/*		
 		this.add(dynamicSideChart,"wrap,center,growx");
 		dynamicSideChart.start();
-		//this.add(mainChart, "wrap, center , growx");
+		this.add(mainChart, "wrap, center , growx");
 		
-		/*
+		
 		
 		this.add(sideChart1, "wrap, center , growx");
 		this.add(new JLabel("Select wave : "),"left,split 2");
@@ -79,8 +52,7 @@ public class ChartsPanel extends JPanel {
 		
 		this.add(sideChart2, "wrap, center , growx");
 		this.add(new JLabel("Select wave : "),"left,split 2");
-		this.add(waveDisplaySelection.get(1),"wrap , left ");
-		
+		this.add(waveDisplaySelection.get(1),"wrap , left ");	
 		*/
 
 	}

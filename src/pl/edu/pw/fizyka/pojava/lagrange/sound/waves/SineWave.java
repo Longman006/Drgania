@@ -11,8 +11,10 @@ public class SineWave extends Wave {
 
 	@Override
 	public double calculateWave(double time) {
-		
-		return Math.sin(2 * Math.PI * this.waveParams.getFrequency() * time);
+		Double displacement = Math.sin(2 * Math.PI * this.waveParams.getFrequency() * time);
+		System.out.println("frequency : "+this.waveParams.getFrequency());
+		System.out.println("returning Sine value : "+displacement);
+		return displacement;
 		
 	}
 

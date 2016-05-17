@@ -8,18 +8,25 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
+import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
 
 public class WaveButtonListener implements ActionListener {
 
-	JComboBox<String> waveSelection;
+	JComboBox<WaveTypes> waveSelection;
 	JSlider waveAmplitude;
 	JTextField waveFrequency;
 	ModelManager model;
  	
+	/**
+	 * @param waveSelection
+	 * @param waveAmplitude
+	 * @param waveFrequency
+	 * @param model
+	 */
 	public WaveButtonListener(
-			JComboBox<String> waveSelection,
+			JComboBox<WaveTypes> waveSelection,
 			JSlider waveAmplitude,
 			JTextField waveFrequency,
 			ModelManager model) {
@@ -50,6 +57,7 @@ public class WaveButtonListener implements ActionListener {
 				waveAmplitude.getValue()
 				);
 		
+		model.addWave(waveParams,(WaveTypes) waveSelection.getSelectedItem());
 		
 	}
 	

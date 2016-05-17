@@ -11,10 +11,11 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
+import pl.edu.pw.fizyka.pojava.lagrange.utilities.listeners.WaveButtonListener;
 
 public class SettingsPanel extends Panel {
 
-	JComboBox<String> waveSelection;
+	JComboBox<WaveTypes> waveSelection;
 	JSlider amplitude;
 	JTextField userFrequency;
 	JButton addWaveButton;
@@ -27,17 +28,18 @@ public class SettingsPanel extends Panel {
 	public SettingsPanel(ModelManager model) {
 		
 		this.model = model;
-		
-		int n = WaveTypes.values().length;
-		String[] waveTypes = new String[n];
-		for(int i = 0 ; i < n ; i++){
-			waveTypes[i] = WaveTypes.values()[i].toString();
-		}
-		
-		waveSelection = new JComboBox<String>(waveTypes);
+
+		waveSelection = new JComboBox<WaveTypes>(WaveTypes.values());
 		amplitude = new JSlider();
 		userFrequency = new JTextField("Frequency (Hz)");
 		addWaveButton = new JButton("Add Wave");
+		
+		addWaveButton.addActionListener(new WaveButtonListener(
+				waveSelection,
+				amplitude,
+				userFrequency,
+				model
+			));
 		
 		this.setLayout(new MigLayout());
 		this.add(new JLabel("Select wave function : "),"wrap,left");

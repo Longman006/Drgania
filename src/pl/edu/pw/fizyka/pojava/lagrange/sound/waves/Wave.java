@@ -55,7 +55,7 @@ public abstract class Wave {
 	
 	@Override
 	public String toString(){
-		return this.waveType.toString();	
+		return this.waveType.toString()+waveParams.getFrequency();	
 	}
 	
 	public int getFrequency(){

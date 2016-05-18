@@ -1,7 +1,7 @@
 package pl.edu.pw.fizyka.pojava.lagrange.charts;
 
 import java.awt.Color;
-import java.awt.LayoutManager;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +14,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.general.Dataset;
+
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -24,6 +24,10 @@ import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
 
 public class DynamicChart extends JPanel implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private TimeSeries timeSeries;
 	private TimeSeriesCollection timeSeriesCollection;
 	private Wave wave;
@@ -33,6 +37,7 @@ public class DynamicChart extends JPanel implements ActionListener {
 	public void setWave(Wave wave){
 		this.wave = wave;
 	}
+	
 	public DynamicChart(Wave wave) {
 		
 		int speed = 50;//miliseconds
@@ -56,11 +61,11 @@ public class DynamicChart extends JPanel implements ActionListener {
 				dataset);
 		
 		XYPlot plot = chartCreated.getXYPlot();
-		//plot.setBackgroundPaint(new Color(250,0,0));
+		plot.setBackgroundPaint(Color.lightGray);
 		plot.setDomainGridlinesVisible(true);
-		plot.setDomainGridlinePaint(new Color(0,250,0));
+		plot.setDomainGridlinePaint(Color.GREEN);
 		plot.setRangeGridlinesVisible(true);
-		plot.setRangeGridlinePaint(new Color(0,0,250));
+		plot.setRangeGridlinePaint(Color.BLUE);
 		
 		ValueAxis xAxis = plot.getDomainAxis();
 		xAxis.setAutoRange(true);
@@ -81,9 +86,11 @@ public class DynamicChart extends JPanel implements ActionListener {
 		return chartCreated;
 		
 	}
+	
 	public void start(){
 		this.timer.start();
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		

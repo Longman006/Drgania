@@ -1,6 +1,5 @@
 package pl.edu.pw.fizyka.pojava.lagrange.sound.waves;
 
-import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.wavfile.WavFile;
 
 /**

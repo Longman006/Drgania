@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
 
@@ -57,9 +57,34 @@ public class WaveButtonListener implements ActionListener {
 				waveAmplitude.getValue()
 				);
 		
-		model.addWave(waveParams,(WaveTypes) waveSelection.getSelectedItem());
+		WaveTypes waveType = (WaveTypes) waveSelection.getSelectedItem(); 
+		
+		if(dialogWindow(waveParams,waveType)){;
+			model.addWave(waveParams,waveType);
+		}
+		
+
+		
+		
+		
 		
 	}
-	
+	private boolean dialogWindow(WaveParameters waveParams, WaveTypes waveType){
+		
+		String message = "Add +"+waveType.toString()+" wave \n"+
+				"Frequency : "+waveParams.getFrequency()+"\n"+
+				"Amplitude : "+waveParams.getAmplitude();
+		int answer = JOptionPane.showConfirmDialog(
+				null,
+				message,
+				"Confirm Window",
+				JOptionPane.YES_NO_OPTION);
+				
+		if(answer == JOptionPane.YES_OPTION){
+			return true;
+		}
+		
+		return false;
+	}
 
 }

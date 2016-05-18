@@ -1,15 +1,15 @@
 package pl.edu.pw.fizyka.pojava.lagrange.charts;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.LayoutManager;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
 
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.Timer;
+
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
@@ -32,16 +32,20 @@ import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
 
 public class PeriodChart extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private XYDataset dataset;
 	private Wave wave;
 	private JFreeChart chart;
 	private ChartPanel chartPanel;
 	private ModelManager model;
 	private JComboBox<Wave> waveDisplaySelection;
-	private JPanel settingsPanel;
+
 	
 	private int points = 100;
-	private int updateSpeed = 2000;//miliseconds
+
 	
 	/**
 	 * @param model
@@ -49,51 +53,47 @@ public class PeriodChart extends JPanel {
 	public PeriodChart(ModelManager model) {
 		
 		this.setLayout(new MigLayout());
-		settingsPanel = new JPanel(new FlowLayout());
 		
-		//waveDisplaySelection = new JComboBox<Wave>();
+		waveDisplaySelection = new JComboBox<Wave>();
 		this.model = model;
-		/*
+		
 		
 		
 		waveDisplaySelection.addPopupMenuListener(new PopupMenuListener(){
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent arg0) {
-				
-				Wave waveTmp = (Wave) waveDisplaySelection.getSelectedItem();
-				if(waveTmp != wave){
-					
-					wave=waveTmp;
-					UpdateDisplay();
-				}
-				
+				System.out.println("PopupMenuCanceled");
 				
 				
 			}
 
 			@Override
 			public void popupMenuWillBecomeVisible(PopupMenuEvent arg0) {
-				UpdateOptions();
 				
+				System.out.println("PopupBecameVisible");
+				PeriodChart.this.updateOptions();
 			}
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 				System.out.println("JComboBox has become invisible");
+				
+				PeriodChart.this.updateDisplay();
 			}
 			
-		});;
+		});
+		
 		waveDisplaySelection.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				wave= (Wave)waveDisplaySelection.getSelectedItem();
+				wave = (Wave) waveDisplaySelection.getSelectedItem();
 				
 			}
 			
 		});
-		*/
+
 		wave= new SineWave(new WaveParameters(
 				440, // frequency 
 				1   // Amplitude
@@ -102,15 +102,19 @@ public class PeriodChart extends JPanel {
 		dataset = createDataset();
 		chart = createChart(dataset);
 		chartPanel = new ChartPanel(chart);
-		this.add(chartPanel);
-		//this.add(waveDisplaySelection);
+		
+		this.add(chartPanel,"span 2,wrap");
+		this.add(new JLabel("Select wave : "));
+		this.add(waveDisplaySelection,"wrap");
 	}
 
-	protected void UpdateDisplay() {
+	protected void updateDisplay() {
+		
 		chart.getXYPlot().setDataset(createDataset());
+		chart.setTitle(wave.toString());
 	}
 
-	protected void UpdateOptions() {
+	protected void updateOptions() {
 		
 		if(this.waveDisplaySelection.getComponentCount() != 
 				model.getCurrentWaveContainerSize()){

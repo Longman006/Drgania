@@ -24,7 +24,8 @@ public class WaveContainer {
 	}
 	
 	public Wave[] toArray(){
-		return (Wave[]) wavesList.toArray();
+		Wave[] array = wavesList.toArray(new Wave[wavesList.size()]);
+		return array;
 	}
 	
 	public int getSize(){

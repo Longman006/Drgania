@@ -34,6 +34,8 @@ public class SettingsPanel extends Panel {
 		userFrequency = new JTextField("Frequency (Hz)");
 		addWaveButton = new JButton("Add Wave");
 		
+		
+		amplitude.setMaximum(100);
 		addWaveButton.addActionListener(new WaveButtonListener(
 				waveSelection,
 				amplitude,

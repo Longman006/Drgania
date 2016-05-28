@@ -1,59 +1,63 @@
 package pl.edu.pw.fizyka.pojava.lagrange.model;
 import java.util.ArrayList;
 
+import pl.edu.pw.fizyka.pojava.lagrange.obsolete.WaveContainer;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
-import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveContainer;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
 public class ModelManager {
 	
-	private ArrayList<WaveContainer> waveContainers = new ArrayList<WaveContainer>();
-	/**
-	 * Manages all the wave functions. Contains an ArrayList of WaveContainers, 
-	 * each being a package of wave functions for which to calculate 
-	 * the total displacement(superposition)
-	 * also takes care of scaling. By default works on the last wave package added.
-	 */
+	private ArrayList<Wave> waves;
+	private double scale = 0;
+	
 	public ModelManager() {
 		
-		this.newWaveContainer();
+		this.waves = new ArrayList<Wave>();
 		
 	}
 	
-	/**
-	 * Creates and adds a new WaveContainer 
-	 * to the ArrayList of wave packages.
-	 */
-	public void newWaveContainer(){
+	public void reset(){
 		
-		waveContainers.add(new WaveContainer());
+		waves = new ArrayList<Wave>();
 		
 	}
 	
-	/**
-	 * Adds a new wave based on waveParams 
-	 * to current wave package
-	 * @param waveParams 
-	 */
+
 	public void addWave(WaveParameters waveParams,WaveTypes waveType){
+	
 		System.out.println("Adding wave  : "+waveType.toString());
-		this.getCurrentWaveContainer().addWave(waveParams,waveType);
+		this.waves.add(waveType.getWave(waveParams));
+		this.scale = (double)1/this.waves.size();
+		System.out.println("Scale : "+scale);
 		
-	}
-	private WaveContainer getCurrentWaveContainer(){
-		return waveContainers.get(waveContainers.size()-1);
 	}
 	
-	/**
-	 * @return returns a Wave array 
-	 * containing all the current working wave functions
-	 */
-	public Wave[] getCurrentWaveArray(){
-		return getCurrentWaveContainer().toArray();
+	public ArrayList<Wave> getWaves(){
 		
+		return this.waves;
 	}
-	public int getCurrentWaveContainerSize(){
-		return getCurrentWaveContainer().getSize();
+	
+	public Wave[] getWavesArray(){
+		Wave[] array = waves.toArray(new Wave[waves.size()]);
+		return array;
 	}
+	public double superposition(double time){
+		
+		double displacement = 0;
+		for(Wave wave : getWavesArray()){
+			double waveDisplacement = wave.calculateWave(time);
+			System.out.println("Wave : "+wave.toString());
+			System.out.println("Displacement : "+waveDisplacement);
+			
+			 displacement = displacement+ waveDisplacement;
+			 
+		}
+		System.out.println("Before Scaling superposition : "+displacement);
+		displacement = displacement*scale;
+		System.out.println("Returning superposition : "+displacement);
+		return displacement;
+	}
+	
+	
 
 }

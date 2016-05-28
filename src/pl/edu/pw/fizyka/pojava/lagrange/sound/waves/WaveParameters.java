@@ -15,7 +15,7 @@ public class WaveParameters {
 
 	private int duration; 
 	
-	protected int amplitude;
+	protected double amplitude;
 
 	protected long numberOfFrames; 
 
@@ -34,11 +34,11 @@ public class WaveParameters {
 		return samplingRate;
 	}
 	
-	public int getAmplitude() {
+	public double getAmplitude() {
 		return amplitude;
 	}
 
-	public void setAmplitude(int amplitude) {
+	public void setAmplitude(double amplitude) {
 		this.amplitude = amplitude;
 	}
 	
@@ -78,7 +78,7 @@ public class WaveParameters {
 	}
 
 
-	public WaveParameters(int frequency, int amplitude) {
+	public WaveParameters(int frequency, double amplitude) {
 		
 		this.frequency = frequency;
 		this.amplitude = amplitude;

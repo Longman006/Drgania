@@ -1,8 +1,9 @@
-package pl.edu.pw.fizyka.pojava.lagrange.utilities;
+package pl.edu.pw.fizyka.pojava.lagrange.obsolete;
 import java.util.ArrayList;
 
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
+import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
 
 /**
  * 
@@ -10,7 +11,7 @@ import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
  * A container class, a package of wave functions
  *
  */
-public class WaveContainer {
+public class WaveContainer  {
 
 	private ArrayList<Wave> wavesList;
 	

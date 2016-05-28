@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.lagrange.utilities;
+package pl.edu.pw.fizyka.pojava.lagrange.obsolete;
 
 import java.util.ArrayList;
 

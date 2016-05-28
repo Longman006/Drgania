@@ -13,7 +13,8 @@ public class CosineWave extends Wave {
 	@Override
 	public double calculateWave(double time) {
 		
-		return Math.cos(2 * Math.PI * this.waveParams.getFrequency() * time);
+		return Math.cos(2 * Math.PI * this.waveParams.getFrequency() * time)*
+				this.waveParams.getAmplitude();
 		
 	}
 

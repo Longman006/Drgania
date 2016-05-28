@@ -12,7 +12,8 @@ public class SawtoothWave extends Wave {
 	@Override
 	public double calculateWave(double time) {
 		
-		return 2*Math.asin(Math.sin(2 * Math.PI * this.waveParams.getFrequency() * time))/Math.PI;
+		return 2*Math.asin(Math.sin(2 * Math.PI * this.waveParams.getFrequency() * time))/Math.PI*
+				this.waveParams.getAmplitude();
 	}
 
 }

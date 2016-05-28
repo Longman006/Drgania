@@ -30,13 +30,15 @@ public class LayoutManager {
 		frame.setSize(600,1200);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
-		mainPanel.add(chartsPanel, "span 2,growx,wrap");
-		mainPanel.add(settingsPanel,"right,gapleft 40");
-		mainPanel.add(controlsPanel,"left,gapleft 40,wrap");
+		
+		mainPanel.add(chartsPanel, "span 2,growx,growy,wrap");
+		mainPanel.add(settingsPanel,"growx,growy");
+		mainPanel.add(controlsPanel,"growx,growy,wrap");
 		mainPanel.add(new JLabel("Select look and feel :"), "right");
 		mainPanel.add(new LFChooser(frame),"center, growx,wrap");
 		
 		frame.add(mainPanel);
+		frame.pack();
 		
 	}
 

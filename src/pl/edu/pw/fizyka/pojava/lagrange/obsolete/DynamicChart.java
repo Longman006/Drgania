@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.lagrange.charts;
+package pl.edu.pw.fizyka.pojava.lagrange.obsolete;
 
 import java.awt.Color;
 

@@ -54,7 +54,7 @@ public class WaveButtonListener implements ActionListener {
 		
 		WaveParameters waveParams = new WaveParameters(
 				frequency,
-				waveAmplitude.getValue()
+				(double)waveAmplitude.getValue()/100
 				);
 		
 		WaveTypes waveType = (WaveTypes) waveSelection.getSelectedItem(); 

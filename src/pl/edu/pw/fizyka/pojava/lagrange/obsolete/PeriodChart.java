@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.lagrange.charts;
+package pl.edu.pw.fizyka.pojava.lagrange.obsolete;
 
 import java.awt.Color;
 
@@ -115,18 +115,7 @@ public class PeriodChart extends JPanel {
 	}
 
 	protected void updateOptions() {
-		
-		if(this.waveDisplaySelection.getComponentCount() != 
-				model.getCurrentWaveContainerSize()){
-			
-			waveDisplaySelection.removeAllItems();
-			
-			for(Wave wave : model.getCurrentWaveArray() ){
-				
-				waveDisplaySelection.addItem(wave);
-			}
-		}
-		
+
 	}
 
 	/**

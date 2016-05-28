@@ -13,7 +13,8 @@ public class SquareWave extends Wave {
 	@Override
 	public double calculateWave(double time) {
 
-		return Math.signum(Math.sin(2 * Math.PI * this.waveParams.getFrequency() * time));
+		return this.waveParams.getAmplitude()*
+				Math.signum(Math.sin(2 * Math.PI * this.waveParams.getFrequency() * time));
 		
 	}	
 }

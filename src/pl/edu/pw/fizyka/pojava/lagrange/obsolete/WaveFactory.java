@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.lagrange.utilities;
+package pl.edu.pw.fizyka.pojava.lagrange.obsolete;
 
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.CosineWave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.ExpTriangleWave;
@@ -7,6 +7,7 @@ import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.SineWave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.SquareWave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
+import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
 
 /**
  * @author longman

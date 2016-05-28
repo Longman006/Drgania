@@ -4,9 +4,12 @@ package pl.edu.pw.fizyka.pojava.lagrange.layout;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import pl.edu.pw.fizyka.pojava.lagrange.charts.DynamicChart;
-import pl.edu.pw.fizyka.pojava.lagrange.charts.PeriodChart;
+import pl.edu.pw.fizyka.pojava.lagrange.charts.SingleWaveChart;
+import pl.edu.pw.fizyka.pojava.lagrange.charts.SuperPositionChart;
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
+
+import pl.edu.pw.fizyka.pojava.lagrange.obsolete.DynamicChart;
+import pl.edu.pw.fizyka.pojava.lagrange.obsolete.PeriodChart;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.SineWave;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
 
@@ -15,6 +18,9 @@ public class ChartsPanel extends JPanel {
 	
 
 	private ModelManager model;
+	private SingleWaveChart singleWaveChart;
+	private ChartSettingsPanel chartSettingsPanel;
+	private SuperPositionChart superPositionChart;
 
 	
 	private static final long serialVersionUID = 1L;
@@ -26,14 +32,15 @@ public class ChartsPanel extends JPanel {
 	public ChartsPanel(ModelManager model) {
 		
 		this.model = model;
+		this.superPositionChart = new SuperPositionChart(model);
+		this.singleWaveChart=new SingleWaveChart(model);
+		this.chartSettingsPanel = new ChartSettingsPanel(singleWaveChart);
 		
 		this.setLayout(new MigLayout());
-		this.add(new PeriodChart(model),"wrap,center,growx");
-		this.add(new DynamicChart(new SineWave(new WaveParameters(
-				1, // frequency 
-				1   // Amplitude
-			))),"wrap");
-		
+		this.add(singleWaveChart,"wrap");
+		this.add(chartSettingsPanel, "growx,wrap");
+		this.add(superPositionChart, "wrap");
+		this.add(new ChartSettingsPanel(superPositionChart), "growx,wrap");
 	}
 
 

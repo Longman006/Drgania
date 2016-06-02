@@ -31,11 +31,11 @@ public class LayoutManager {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
 		
-		mainPanel.add(chartsPanel, "span 2,growx,growy,wrap");
-		mainPanel.add(settingsPanel,"growx,growy");
-		mainPanel.add(controlsPanel,"growx,growy,wrap");
-		mainPanel.add(new JLabel("Select look and feel :"), "right");
-		mainPanel.add(new LFChooser(frame),"center, growx,wrap");
+		mainPanel.add(chartsPanel, "growx,growy,wrap");
+		mainPanel.add(settingsPanel,"split 2,center");
+		mainPanel.add(controlsPanel,"wrap");
+		mainPanel.add(new JLabel("Select look and feel :"), "split 2,center");
+		mainPanel.add(new LFChooser(frame),"right, growx,wrap");
 		
 		frame.add(mainPanel);
 		frame.pack();

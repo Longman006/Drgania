@@ -6,6 +6,11 @@ import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
 
 public class SuperPositionChart extends CustomDynamicChart {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public SuperPositionChart(ModelManager model) {
 		super(model);
 		// TODO Auto-generated constructor stub
@@ -22,7 +27,7 @@ public class SuperPositionChart extends CustomDynamicChart {
 		
 		long numberOfUnits = super.tickCount*super.unitsPerTick;
 		double time = (double) super.unit.getDecimal()*numberOfUnits;
-		System.out.println("time : "+time);
+		
 		
 		super.series.add(tickCount, model.superposition(time));
 		tickCount++;

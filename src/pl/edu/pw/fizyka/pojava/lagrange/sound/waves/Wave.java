@@ -23,7 +23,9 @@ public abstract class Wave {
 	 */
 	public abstract double calculateWave(double time);
 	
-	
+	public double getAmplitude(){
+		return this.waveParams.getAmplitude();
+	}
 	
 	public void generateWavFile(){
 		

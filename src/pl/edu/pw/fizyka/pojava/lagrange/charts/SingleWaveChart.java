@@ -1,6 +1,5 @@
 package pl.edu.pw.fizyka.pojava.lagrange.charts;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,12 +15,18 @@ import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
 
 public class SingleWaveChart extends CustomDynamicChart {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected Wave wave;
 	protected JComboBox<Wave> waveDisplaySelection;
 	
 	public SingleWaveChart(ModelManager model) {
 		super(model);
-		wave = WaveTypes.SINE.getWave(new WaveParameters(100, 1));
+		super.chart.setTitle("SingleWaveChart");
+		wave = WaveTypes.SINE.getWave(new WaveParameters(440, 1));
+
 		waveDisplaySelection =  new JComboBox<Wave>();
 		//waveDisplaySelection.setMinimumSize(new Dimension(100,50));
 		waveDisplaySelection.addPopupMenuListener(new PopupMenuListener() {
@@ -35,8 +40,9 @@ public class SingleWaveChart extends CustomDynamicChart {
 				int diff = array.length- itemCount;
 						
 				if(diff>0){
-					for(int ii = itemCount ; ii < diff ; ii++){
+					for(int ii = itemCount ; ii < diff+itemCount ; ii++){
 						SingleWaveChart.this.waveDisplaySelection.addItem(array[ii]);
+						System.out.println("Adding item to waveSelection");
 					}
 				}
 			}

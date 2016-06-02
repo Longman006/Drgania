@@ -1,41 +1,50 @@
 package pl.edu.pw.fizyka.pojava.lagrange.layout;
 
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
+import javax.swing.JSlider;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pw.fizyka.pojava.lagrange.charts.CustomDynamicChart;
-import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
-
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.Units;
 
 public class ChartSettingsPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private CustomDynamicChart chart;
 	private JComboBox<Units> unitSelection;
-	private JTextField textField;
 	private Units unit;
 	private int numberOfUnits;
 	private JButton startStop;
+	private JSlider timeDivSelection;
+	private JLabel timeDivDisplay;
+	private JPanel timeDivSelectionPanel;
 	private boolean paused = true;
 	
 	public ChartSettingsPanel(CustomDynamicChart chart) {
 		
+
+		timeDivSelectionPanel = new JPanel(new MigLayout());
+		this.timeDivSelection = new JSlider(0, 100, 50);
+		this.timeDivDisplay = new JLabel(String.format("%d",timeDivSelection.getValue()));
+		timeDivSelectionPanel.add(timeDivDisplay,"wrap,center");
+		timeDivSelectionPanel.add(timeDivSelection,"wrap");
+
 		this.setLayout(new MigLayout());
 		this.chart = chart;
-		chart.updateChart();
 		this.numberOfUnits = 1;
-		this.unit = Units.MILLI;
 		this.unitSelection = new JComboBox<Units>(Units.values());
 		unitSelection.addActionListener(new ActionListener() {
 			
@@ -46,23 +55,17 @@ public class ChartSettingsPanel extends JPanel {
 				chart.updateChart();
 			}
 		});
-		this.textField = new JTextField("Number of units");
-		textField.addActionListener(new ActionListener() {
+		
+		timeDivSelection.addChangeListener(new ChangeListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void stateChanged(ChangeEvent e) {
 				
-				try{
-				 numberOfUnits = Integer.parseUnsignedInt(textField.getText());
-					System.out.println("JTextField : an unsigned integer");
-				}
-				catch(NumberFormatException e1){
-					System.out.println("JTextField : not a valid integer");
-					return;
-				}
-				
-				chart.setUnitsPerTick(numberOfUnits);
-				chart.updateChart();
+				numberOfUnits = timeDivSelection.getValue();
+				timeDivDisplay.setText(String.format("%d",timeDivSelection.getValue()));
+			
+				ChartSettingsPanel.this.chart.setUnitsPerTick(numberOfUnits);
+				ChartSettingsPanel.this.chart.updateChart();
 			}
 		});
 		
@@ -85,11 +88,15 @@ public class ChartSettingsPanel extends JPanel {
 		});
 		
 		this.add(new JLabel("Select time/div : "));
-		this.add(textField);
+		this.add(timeDivSelectionPanel);
 		this.add(unitSelection);
 		this.add(startStop,"wrap");
 		
-		
+		this.unit = (Units) unitSelection.getSelectedItem();
+		this.numberOfUnits = timeDivSelection.getValue();
+		chart.setUnit(unit);	
+		chart.setUnitsPerTick(numberOfUnits);
+		chart.updateChart();
 		
 		
 	}

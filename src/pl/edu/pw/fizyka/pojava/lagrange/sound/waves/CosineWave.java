@@ -1,7 +1,5 @@
 package pl.edu.pw.fizyka.pojava.lagrange.sound.waves;
 
-import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
-
 public class CosineWave extends Wave {
 
 	public CosineWave(WaveParameters waveParams) {

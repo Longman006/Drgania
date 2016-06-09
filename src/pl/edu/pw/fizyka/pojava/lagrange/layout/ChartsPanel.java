@@ -8,10 +8,7 @@ import pl.edu.pw.fizyka.pojava.lagrange.charts.SingleWaveChart;
 import pl.edu.pw.fizyka.pojava.lagrange.charts.SuperPositionChart;
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
 
-import pl.edu.pw.fizyka.pojava.lagrange.obsolete.DynamicChart;
-import pl.edu.pw.fizyka.pojava.lagrange.obsolete.PeriodChart;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.SineWave;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
+
 
 public class ChartsPanel extends JPanel {
 
@@ -32,7 +29,7 @@ public class ChartsPanel extends JPanel {
 	public ChartsPanel(ModelManager model) {
 		
 		this.model = model;
-		this.superPositionChart = new SuperPositionChart(model);
+		this.superPositionChart = new SuperPositionChart(this.model);
 		this.singleWaveChart=new SingleWaveChart(model);
 		this.chartSettingsPanel = new ChartSettingsPanel(singleWaveChart);
 		

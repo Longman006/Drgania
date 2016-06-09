@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
-import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
+import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveTypes;
 import pl.edu.pw.fizyka.pojava.lagrange.utilities.listeners.WaveButtonListener;
 
 public class SettingsPanel extends Panel {

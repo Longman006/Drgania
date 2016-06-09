@@ -2,6 +2,11 @@ package pl.edu.pw.fizyka.pojava.lagrange.utilities.wavfile;
 
 public class WavFileException extends Exception
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public WavFileException()
 	{
 		super();

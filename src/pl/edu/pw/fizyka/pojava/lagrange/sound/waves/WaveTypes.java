@@ -1,12 +1,4 @@
-package pl.edu.pw.fizyka.pojava.lagrange.utilities;
-
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.CosineWave;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.ExpTriangleWave;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.SawtoothWave;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.SineWave;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.SquareWave;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
+package pl.edu.pw.fizyka.pojava.lagrange.sound.waves;
 
 public enum WaveTypes {
 	SINE(){		

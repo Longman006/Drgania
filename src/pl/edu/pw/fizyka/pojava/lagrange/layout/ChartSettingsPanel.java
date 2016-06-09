@@ -37,7 +37,7 @@ public class ChartSettingsPanel extends JPanel {
 		
 
 		timeDivSelectionPanel = new JPanel(new MigLayout());
-		this.timeDivSelection = new JSlider(0, 100, 50);
+		this.timeDivSelection = new JSlider(1, 100, 50);
 		this.timeDivDisplay = new JLabel(String.format("%d",timeDivSelection.getValue()));
 		timeDivSelectionPanel.add(timeDivDisplay,"wrap,center");
 		timeDivSelectionPanel.add(timeDivSelection,"wrap");

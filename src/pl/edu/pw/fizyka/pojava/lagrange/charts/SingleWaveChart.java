@@ -3,15 +3,17 @@ package pl.edu.pw.fizyka.pojava.lagrange.charts;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
+
 
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.Wave;
-import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
-import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
+
+import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveSelection;
+
 
 public class SingleWaveChart extends CustomDynamicChart {
 
@@ -21,61 +23,35 @@ public class SingleWaveChart extends CustomDynamicChart {
 	private static final long serialVersionUID = 1L;
 	protected Wave wave;
 	protected JComboBox<Wave> waveDisplaySelection;
+	protected WaveSelection waveSelection;
+	protected DefaultComboBoxModel<Wave> boxModel;
 	
 	public SingleWaveChart(ModelManager model) {
 		super(model);
+		
+		
 		super.chart.setTitle("SingleWaveChart");
-		wave = WaveTypes.SINE.getWave(new WaveParameters(440, 1));
-
+		
+		wave = null;
+		boxModel = new DefaultComboBoxModel<>();
 		waveDisplaySelection =  new JComboBox<Wave>();
-		//waveDisplaySelection.setMinimumSize(new Dimension(100,50));
-		waveDisplaySelection.addPopupMenuListener(new PopupMenuListener() {
-			
-			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-				System.out.println("PopupBecameVisible");
-				
-				int itemCount = SingleWaveChart.this.waveDisplaySelection.getItemCount();
-				Wave[] array = SingleWaveChart.this.model.getWavesArray();
-				int diff = array.length- itemCount;
-						
-				if(diff>0){
-					for(int ii = itemCount ; ii < diff+itemCount ; ii++){
-						SingleWaveChart.this.waveDisplaySelection.addItem(array[ii]);
-						System.out.println("Adding item to waveSelection");
-					}
-				}
-			}
-			
-			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				System.out.println("JComboBox has become invisible");
-				
-	
-				
-				
-				
-			}
-			
-			@Override
-			public void popupMenuCanceled(PopupMenuEvent e) {
-				System.out.println("PopupMenuCanceled");
-				
-				
-			}
-		});
-		this.waveDisplaySelection.addActionListener(new ActionListener() {
+		
+		this.waveSelection = new WaveSelection(model);
+		this.waveSelection.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				wave = (Wave) waveDisplaySelection.getSelectedItem();
+				System.out.println("ActionPerformed");
+				Wave newWave = (Wave) waveSelection.getSelectedItem();
+				wave = newWave;
+				System.out.println("wave : "+wave);
 				updateTitle();
-				//SingleWaveChart.this.tickCount = 0;
-				
 			}
 		});
+		
 		this.add(new JLabel("Select Wave : "),"split 2");
-		this.add(waveDisplaySelection,"growx,wrap");
+		this.add(waveSelection,"growx,wrap");
+		this.updateTitle();
 		
 	}
 
@@ -95,7 +71,15 @@ public class SingleWaveChart extends CustomDynamicChart {
 
 	@Override
 	protected void updateTitle() {
-		super.chart.setTitle(this.wave.toString());
+		try{
+			super.chart.setTitle(this.wave.toString());
+		}
+		catch(Exception e){
+			System.out.println("Chart Title exception:"+e);
+			super.chart.setTitle("No wave Selected");
+			return;
+		}
+		
 	}
 
 	@Override
@@ -103,7 +87,14 @@ public class SingleWaveChart extends CustomDynamicChart {
 		
 		long numberOfUnits = super.tickCount*super.unitsPerTick;
 		double time = super.unit.getDecimal()*numberOfUnits;
-		double displacement = this.wave.calculateWave(time);
+		double displacement = 0;
+		try{
+			displacement = this.wave.calculateWave(time);
+		}
+		catch(Exception e){
+			//System.out.println(e);
+			return;
+		}
 		
 		super.series.add(tickCount,displacement);
 		super.tickCount++;

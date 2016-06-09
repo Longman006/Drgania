@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 import pl.edu.pw.fizyka.pojava.lagrange.model.ModelManager;
 import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveParameters;
-import pl.edu.pw.fizyka.pojava.lagrange.utilities.WaveTypes;
+import pl.edu.pw.fizyka.pojava.lagrange.sound.waves.WaveTypes;
 
 public class WaveButtonListener implements ActionListener {
 

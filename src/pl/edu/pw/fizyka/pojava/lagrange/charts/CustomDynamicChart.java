@@ -92,7 +92,7 @@ public abstract class CustomDynamicChart extends JPanel implements ActionListene
 		this.tickCount = 0;
 		this.ticksDisplayed = 100;
 		this.unitsPerTick = 1;
-		this.refreshRate = 250;
+		this.refreshRate = 220;
 		
 		this.series = new XYSeries("Series");
 		this.series.add(0, 0);

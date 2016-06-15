@@ -70,7 +70,7 @@ public class ModelManager {
 		double scaleTmp= 0;
 		for(Wave wave : this.waves){
 			
-			scaleTmp += wave.getAmplitude();
+			scaleTmp += Math.abs(wave.getAmplitude());
 		}
 		this.scale = 1/scaleTmp;
 		System.out.println("Scale : "+scale);

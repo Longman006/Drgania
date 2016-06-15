@@ -30,12 +30,61 @@ public class SelectPresets extends JPanel {
 		
 		this.model = model;
 		this.presets = new ArrayList<Preset>();
+		int imax = 20;
 		
 		Preset sineSquare = new Preset("Jumping Sine");
 		sineSquare.addWave(WaveTypes.SINE.getWave(new WaveParameters(3300, 0.5)));
 		sineSquare.addWave(WaveTypes.SQUARE.getWave(new WaveParameters(300, 1)));
-		
 		presets.add(sineSquare);
+		
+		Preset diracDeltas = new Preset("Dirac Deltas");
+	
+		for(int ii = 0; ii<imax ;ii++){
+			diracDeltas.addWave(WaveTypes.SINE.getWave(new WaveParameters(ii, ii)));
+		}
+		presets.add(diracDeltas);
+		
+		Preset sawTooth = new Preset("Sawtooth");
+		for(int ii = 1; ii<imax ; ii++){
+			sawTooth.addWave(WaveTypes.SINE.getWave(
+					new WaveParameters(
+							ii,
+							(double) 2*Math.pow(-1, ii+1)/ii
+					)));
+		}
+		presets.add(sawTooth);
+		
+		Preset square = new Preset("Square");
+		for(int ii = 1; ii<imax ; ii++){
+			square.addWave(WaveTypes.SINE.getWave(
+					new WaveParameters(
+							2*ii+1,
+							(double) 2/(2*ii+1)
+					)));
+		}
+		presets.add(square);
+		
+		Preset xx = new Preset("x");
+		for(int ii = 1; ii<imax ; ii++){
+			xx.addWave(WaveTypes.SINE.getWave(
+					new WaveParameters(
+							4*ii,
+							(double) 2*Math.pow(-1, ii+1)/ii/Math.PI
+					)));
+			xx.addWave(WaveTypes.COSINE.getWave(
+					new WaveParameters(
+							4*ii,
+							(double) 2*(Math.pow(-1, ii+1)-1)/Math.pow(ii, 2)/Math.pow(Math.PI,2)
+					)));
+		}
+		xx.addWave(WaveTypes.CONST.getWave(new WaveParameters(1, (double)1/2)));
+		presets.add(xx);
+		
+		Preset rumble = new Preset ("Rumble 440 hz");
+		rumble.addWave(WaveTypes.SINE.getWave(new WaveParameters(440, 1)));
+		rumble.addWave(WaveTypes.SINE.getWave(new WaveParameters(444, 1)));
+		rumble.addWave(WaveTypes.SINE.getWave(new WaveParameters(448, 1)));
+		presets.add(rumble);
 		
 		presetsDisplay=new JComboBox<Preset>();
 		boxModel  = new DefaultComboBoxModel<Preset>();

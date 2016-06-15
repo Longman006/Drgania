@@ -31,6 +31,12 @@ public enum WaveTypes {
 			System.out.println("Creating "+this.toString());
 			return new ExpTriangleWave(waveParams);
 		}
+	}, CONST {
+		@Override
+		public Wave getWave(WaveParameters waveParams) {
+			System.out.println("Creating "+this.toString());
+			return new Const(waveParams);
+		}
 	};
 	
 	public abstract Wave getWave(WaveParameters waveParams);
